@@ -1,0 +1,107 @@
+<Window x:Class="BreathCircle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="BreathCircle"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Width="180"
+        Height="180">
+
+    <Grid x:Name="RootGrid"
+          Width="150"
+          Height="150"
+          Background="Transparent"
+          MouseLeftButtonDown="Window_MouseLeftButtonDown"
+          MouseMove="Window_MouseMove"
+          MouseLeftButtonUp="Window_MouseLeftButtonUp"
+          Cursor="Hand">
+
+        <!-- 发光层 -->
+        <Ellipse x:Name="GlowLayer"
+                 Width="170"
+                 Height="170"
+                 Opacity="{Binding GlowOpacity}"
+                 IsHitTestVisible="False"/>
+
+        <!-- 主体圆形（玻璃拟态） -->
+        <Ellipse x:Name="CircleLayer"
+                 Width="150"
+                 Height="150"
+                 IsHitTestVisible="False"
+                 RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <ScaleTransform ScaleX="{Binding CircleScale}"
+                                ScaleY="{Binding CircleScale}"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+
+        <!-- 圆环描边 -->
+        <Ellipse x:Name="RingLayer"
+                 Width="150"
+                 Height="150"
+                 IsHitTestVisible="False"
+                 RenderTransformOrigin="0.5,0.5"
+                 StrokeThickness="1.2"
+                 Opacity="0.35">
+            <Ellipse.RenderTransform>
+                <ScaleTransform ScaleX="{Binding CircleScale}"
+                                ScaleY="{Binding CircleScale}"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+
+        <!-- 中央文字 -->
+        <TextBlock x:Name="CenterTextBlock"
+                   Text="{Binding DisplayCenterText}"
+                   Visibility="{Binding CenterTextVisible}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontFamily="Segoe UI"
+                   FontSize="15"
+                   FontWeight="Normal"
+                   Foreground="#DDFFFFFF"
+                   IsHitTestVisible="False"
+                   TextAlignment="Center"
+                   LineStackingStrategy="BlockLineHeight"
+                   LineHeight="21">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="6"
+                                  ShadowDepth="1"
+                                  Color="#40000000"
+                                  Opacity="0.5"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <!-- 右键菜单 -->
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="开始/暂停" Click="OnStartStopClick"/>
+                <MenuItem Header="停止" Click="OnStopClick"/>
+                <Separator/>
+                <MenuItem Header="切换模式">
+                    <MenuItem x:Name="ModeBox" Header="盒式呼吸" Click="OnSetModeClick" Tag="BoxBreathing" IsCheckable="True"/>
+                    <MenuItem x:Name="Mode478" Header="4-7-8 呼吸" Click="OnSetModeClick" Tag="FourSevenEight" IsCheckable="True"/>
+                    <MenuItem x:Name="ModeResonance" Header="共鸣呼吸" Click="OnSetModeClick" Tag="Resonance" IsCheckable="True"/>
+                    <MenuItem x:Name="ModeSigh" Header="生理性叹息" Click="OnSetModeClick" Tag="PhysiologicalSigh" IsCheckable="True"/>
+                    <MenuItem x:Name="ModeWimHof" Header="Wim Hof" Click="OnSetModeClick" Tag="WimHof" IsCheckable="True"/>
+                </MenuItem>
+                <MenuItem Header="Wim Hof 设置" Click="OnWimHofSettingsClick"/>
+                <MenuItem Header="颜色设置" Click="OnColorSettingsClick"/>
+                <Separator/>
+                <MenuItem x:Name="MenuStageText" Header="显示阶段文字" Click="OnToggleSettingClick" Tag="StageText" IsCheckable="True" IsChecked="True"/>
+                <MenuItem x:Name="MenuCountdown" Header="显示倒计时" Click="OnToggleSettingClick" Tag="Countdown" IsCheckable="True" IsChecked="True"/>
+                <Separator/>
+                <MenuItem x:Name="MenuTopMost" Header="置顶" Click="OnToggleSettingClick" Tag="TopMost" IsCheckable="True" IsChecked="True"/>
+                <MenuItem x:Name="MenuClickThrough" Header="点击穿透" Click="OnToggleSettingClick" Tag="ClickThrough" IsCheckable="True" IsChecked="False"/>
+                <Separator/>
+                <MenuItem Header="退出" Click="OnExitClick"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
+    </Grid>
+</Window>

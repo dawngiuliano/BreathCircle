@@ -1,0 +1,27 @@
+# .NET Build
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio
+.vs/
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Claude / AI tools
+.claude/
+
+# Runtime config (user-specific)
+BreathCircle/Config/
+
+# OS files
+Thumbs.db
+.DS_Store

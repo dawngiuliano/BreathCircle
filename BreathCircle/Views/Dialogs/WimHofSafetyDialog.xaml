@@ -1,0 +1,81 @@
+<Window x:Class="BreathCircle.Views.Dialogs.WimHofSafetyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="⚠ Wim Hof 安全提示"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        MinWidth="400"
+        MaxWidth="480"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 警告图标和标题 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <TextBlock Text="⚠" FontSize="28" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock Text="Wim Hof 呼吸法 — 安全提示"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- 警告内容 -->
+        <TextBlock Grid.Row="1"
+                   TextWrapping="Wrap"
+                   LineHeight="24"
+                   Margin="0,0,0,16"
+                   FontSize="13">
+            Wim Hof 呼吸法包含强力呼吸和长时间屏息，可能导致头晕、四肢麻木或意识模糊。
+
+            <LineBreak/><LineBreak/>
+            <Bold>请勿在以下情况练习：</Bold>
+            <LineBreak/>
+            • 驾驶或操作机械时
+            <LineBreak/>
+            • 游泳或靠近水域时
+            <LineBreak/>
+            • 患有心脏病、高血压或癫痫
+            <LineBreak/>
+            • 怀孕期间
+            <LineBreak/><LineBreak/>
+            屏息时间到达 <Bold>120秒</Bold> 将自动进入下一阶段。请始终在安全环境中练习。
+        </TextBlock>
+
+        <!-- 不再显示复选框 -->
+        <CheckBox x:Name="DontShowAgainCheckBox"
+                  Grid.Row="2"
+                  Content="不再显示此提示"
+                  Margin="0,0,0,16"
+                  IsChecked="False"/>
+
+        <!-- 按钮 -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="取消"
+                    Width="80"
+                    Height="32"
+                    Margin="0,0,10,0"
+                    IsCancel="True"
+                    Click="OnCancelClick"/>
+            <Button Content="我已知晓"
+                    Width="100"
+                    Height="32"
+                    IsDefault="True"
+                    Click="OnAcceptClick"
+                    Background="#FF4CAF50"
+                    Foreground="White"
+                    FontWeight="SemiBold"/>
+        </StackPanel>
+    </Grid>
+</Window>

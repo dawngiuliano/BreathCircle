@@ -1,0 +1,95 @@
+<Window x:Class="BreathCircle.Views.Dialogs.ColorSettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="颜色设置"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="16" Width="400">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 左侧：模式列表 -->
+        <ListBox x:Name="ModeList" Grid.Row="0" Grid.RowSpan="2"
+                 Width="100" Margin="0,0,12,0">
+            <ListBoxItem Tag="BoxBreathing" Content="盒式呼吸" Padding="6,8"/>
+            <ListBoxItem Tag="FourSevenEight" Content="4-7-8 呼吸" Padding="6,8"/>
+            <ListBoxItem Tag="Resonance" Content="共鸣呼吸" Padding="6,8"/>
+            <ListBoxItem Tag="PhysiologicalSigh" Content="生理性叹息" Padding="6,8"/>
+            <ListBoxItem Tag="WimHof" Content="Wim Hof" Padding="6,8"/>
+        </ListBox>
+
+        <!-- 右侧：色块预览 -->
+        <Rectangle x:Name="PreviewSwatch" Grid.Row="0" Grid.Column="1"
+                   Width="160" Height="40" Margin="0,0,0,8"
+                   RadiusX="8" RadiusY="8" Stroke="#40FFFFFF" StrokeThickness="1"/>
+        <TextBlock x:Name="PreviewHex" Grid.Row="0" Grid.Column="1"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="14" FontWeight="SemiBold" Foreground="White"
+                   Text="" FontFamily="Consolas" Margin="0,0,0,8">
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="4" ShadowDepth="1" Color="#60000000"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <!-- 右侧：调色面板 -->
+        <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,0,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="36"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="R" VerticalAlignment="Center"
+                       FontWeight="SemiBold" Foreground="#FF6B6B"/>
+            <Slider x:Name="SliderR" Grid.Row="0" Grid.Column="1"
+                    Minimum="0" Maximum="255" SmallChange="1" LargeChange="16" Margin="4,4"/>
+            <TextBox x:Name="BoxR" Grid.Row="0" Grid.Column="2" Width="30"
+                     HorizontalAlignment="Right" Tag="R"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="G" VerticalAlignment="Center"
+                       FontWeight="SemiBold" Foreground="#FF6BB86B"/>
+            <Slider x:Name="SliderG" Grid.Row="1" Grid.Column="1"
+                    Minimum="0" Maximum="255" SmallChange="1" LargeChange="16" Margin="4,4"/>
+            <TextBox x:Name="BoxG" Grid.Row="1" Grid.Column="2" Width="30"
+                     HorizontalAlignment="Right" Tag="G"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="B" VerticalAlignment="Center"
+                       FontWeight="SemiBold" Foreground="#FF6B6BD6"/>
+            <Slider x:Name="SliderB" Grid.Row="2" Grid.Column="1"
+                    Minimum="0" Maximum="255" SmallChange="1" LargeChange="16" Margin="4,4"/>
+            <TextBox x:Name="BoxB" Grid.Row="2" Grid.Column="2" Width="30"
+                     HorizontalAlignment="Right" Tag="B"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="#" VerticalAlignment="Center"
+                       FontWeight="SemiBold" Foreground="#AAAAAA" FontFamily="Consolas" FontSize="14"/>
+            <TextBox x:Name="HexBox" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                     Text="" MaxLength="6" FontFamily="Consolas" FontSize="13" Margin="4,4,0,4"/>
+        </Grid>
+
+        <!-- 按钮 -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,8,0,0">
+            <Button Content="全部默认" Width="80" Height="28" Margin="0,0,8,0" Click="OnAllDefaultsClick"/>
+            <Button Content="取消" Width="60" Height="28" Margin="0,0,8,0" IsCancel="True" Click="OnCancelClick"/>
+            <Button Content="保存" Width="60" Height="28" IsDefault="True" Click="OnSaveClick"
+                    Background="#FF6BA3D6" Foreground="White" FontWeight="SemiBold"/>
+        </StackPanel>
+    </Grid>
+</Window>
